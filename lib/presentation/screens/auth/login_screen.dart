@@ -25,7 +25,8 @@ class _LoginView extends StatelessWidget {
     return Form(
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal:20.0, vertical: 20.0),
-        children: [Column(
+        children: [
+          Column(
           children: [
             Center(
               child: Image.asset(
@@ -100,7 +101,8 @@ class _LoginView extends StatelessWidget {
             )
 
           ],
-        ),],
+        ),
+        ],
       ),
     );
   }

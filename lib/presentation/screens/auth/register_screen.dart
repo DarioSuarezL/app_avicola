@@ -116,6 +116,6 @@ class _RegisterView extends StatelessWidget {
           ],
         ),],
       ),
-    );;
+    );
   }
 }
