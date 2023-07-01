@@ -1,4 +1,7 @@
+import 'package:app_avicola/config/menu/menu_items.dart';
+import 'package:app_avicola/presentation/screens/auth/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -12,44 +15,49 @@ class HomeScreen extends StatelessWidget {
         title: const Text('¡Bienvenido! Usuario'),
       ),
       body: const Center(
-        child: Text('Home Screen')
+        child: _HomeView()
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(20.0, 70.0, 20.0, 50.0),
-          children: const [
-            _DrawerHeader()
-          ],
-        ),
-      ),
+      drawer: const CustomDrawer(),
     );
   }
 }
 
-class _DrawerHeader extends StatelessWidget {
-  const _DrawerHeader();
+class _HomeView extends StatelessWidget {
+  const _HomeView();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: Image.asset(
-            'assets/default_user.png',
-            width: 90.0,
-            height: 90.0,
+
+    final colors = Theme.of(context).colorScheme;
+
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1.2,
+        crossAxisSpacing: 10.0,
+        mainAxisSpacing: 10.0,
+      ),
+      itemCount: appMenuItems.length,
+      itemBuilder: (context, index) => GestureDetector(
+        child: Card(
+          color: colors.primary,
+          elevation: 10.0,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(appMenuItems[index].title, style: TextStyle(color: colors.onPrimary, fontSize: 20.0),),
+                Text(appMenuItems[index].subTitle, style: TextStyle(color: colors.onPrimary, fontSize: 15.0),),
+                Icon(appMenuItems[index].icon, color: colors.onPrimary, size: 50.0,)
+              ],
+            ),
           ),
         ),
-        const SizedBox(height: 10.0),
-        const Text(
-          'Usuario',
-          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
-        ),
-        const Text(
-          'Código: 0',
-          style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400),
-        )
-      ],
+        onTap: () {
+          // context.pushNamed(appMenuItems[index].routeName);
+        },
+      ),
     );
   }
 }

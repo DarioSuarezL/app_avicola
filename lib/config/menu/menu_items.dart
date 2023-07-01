@@ -15,22 +15,22 @@ class MenuItem{
     required this.icon,
     required this.routeName,
   });
-
 }
 
-const MenuItems = <MenuItem>[
+const appMenuItems = <MenuItem>[
   MenuItem(
-    title: 'Inicio',
-    subTitle: 'Gestión general',
-    link: '/home',
-    icon: Icons.manage_accounts,
-    routeName: 'home_screen'
+    title: 'Galpones',
+    subTitle: 'Gestionar galpones',
+    link: '/galpones',
+    icon: Icons.home_filled,
+    routeName: 'galpones_screen'
   ),
   MenuItem(
-    title: 'Cerrar sesión',
-    subTitle: '',
-    link: '/login',
-    icon: Icons.manage_accounts,
-    routeName: 'login_screen'
-  ),  
+    title: 'Alertas',
+    subTitle: 'Alertas de estado de los distintos galpones',
+    link: '/alertas',
+    icon: Icons.campaign,
+    routeName: 'alertas_screen'
+  ), 
+  
 ];
