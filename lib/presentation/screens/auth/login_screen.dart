@@ -1,6 +1,9 @@
+import 'package:app_avicola/presentation/models/api_response.dart';
+import 'package:app_avicola/presentation/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 
 class LoginScreen extends StatelessWidget {
@@ -23,11 +26,16 @@ class _LoginView extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
   _LoginView();
-  String name = '';
-  String password = '';
 
   @override
   Widget build(BuildContext context) {
+    
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final colors = Theme.of(context).colorScheme;
+    String name = '';
+    String password = '';
+
+
     return Form(
       key: _formKey,
       child: ListView(
@@ -107,10 +115,21 @@ class _LoginView extends StatelessWidget {
                   final nombreUsuario = name;
                   final contrasena = password;
                   final scaf = ScaffoldMessenger.of(context);
-                  
+
+                  ApiResponse apiRes = await userProvider.loginUser(nombreUsuario, contrasena);
+                  if(apiRes.isOK()){
+                    await Future.microtask(() => context.goNamed('home_screen'));
+                  }else{
+                    scaf.showSnackBar(
+                      SnackBar(
+                        backgroundColor: colors.primary,
+                        content: Text(apiRes.msg!),
+                        duration: const Duration(seconds: 2),
+                      )
+                    );
+                  }
 
                 }
-                context.replaceNamed('home_screen');
               },
               child: const Text('Ingresar'),
             ),

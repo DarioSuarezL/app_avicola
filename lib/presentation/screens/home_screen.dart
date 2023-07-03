@@ -30,33 +30,36 @@ class _HomeView extends StatelessWidget {
 
     final colors = Theme.of(context).colorScheme;
 
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 1.2,
-        crossAxisSpacing: 10.0,
-        mainAxisSpacing: 10.0,
-      ),
-      itemCount: appMenuItems.length,
-      itemBuilder: (context, index) => GestureDetector(
-        child: Card(
-          color: colors.primary,
-          elevation: 10.0,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(appMenuItems[index].title, style: TextStyle(color: colors.onPrimary, fontSize: 20.0),),
-                Text(appMenuItems[index].subTitle, style: TextStyle(color: colors.onPrimary, fontSize: 15.0),),
-                Icon(appMenuItems[index].icon, color: colors.onPrimary, size: 50.0,)
-              ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 1.2,
+          crossAxisSpacing: 1.0,
+          mainAxisSpacing: 8.0,
+        ),
+        itemCount: appMenuItems.length,
+        itemBuilder: (context, index) => GestureDetector(
+          child: Card(
+            color: colors.primary,
+            elevation: 10.0,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(appMenuItems[index].title, style: TextStyle(color: colors.onPrimary, fontSize: 20.0),),
+                  Text(appMenuItems[index].subTitle, style: TextStyle(color: colors.onPrimary, fontSize: 15.0),),
+                  Icon(appMenuItems[index].icon, color: colors.onPrimary, size: 50.0,)
+                ],
+              ),
             ),
           ),
+          onTap: () {
+            // context.pushNamed(appMenuItems[index].routeName);
+          },
         ),
-        onTap: () {
-          // context.pushNamed(appMenuItems[index].routeName);
-        },
       ),
     );
   }

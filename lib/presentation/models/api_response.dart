@@ -2,34 +2,48 @@
 //
 //     final apiResponse = apiResponseFromJson(jsonString);
 
-import 'dart:convert';
+// import 'dart:convert';
 
-ApiResponse apiResponseFromJson(String str) => ApiResponse.fromJson(json.decode(str));
+import 'package:app_avicola/presentation/models/user.dart';
 
-String apiResponseToJson(ApiResponse data) => json.encode(data.toJson());
+// ApiResponse apiResponseFromJson(String str) => ApiResponse.fromJson(json.decode(str));
+
+// String apiResponseToJson(ApiResponse data) => json.encode(data.toJson());
 
 class ApiResponse {
     int status;
     String? msg;
-    String? data;
+    User? user;
 
     ApiResponse({
         required this.status,
         this.msg,
-        this.data,
+        this.user,
     });
 
-    factory ApiResponse.fromJson(Map<String, dynamic> json) => ApiResponse(
+
+    // Posibles responses para login y register
+
+    factory ApiResponse.userFromJson(Map<String, dynamic> json) => ApiResponse(
         status: json["status"],
-        msg: json["msg"],
-        data: json["data"],
+        user: User.fromJson(json["data"]),
     );
 
-    Map<String, dynamic> toJson() => {
+    factory ApiResponse.msgFromJson(Map<String, dynamic> json) => ApiResponse(
+        status: json["status"],
+        msg: json["msg"],
+    );
+
+
+
+    Map<String, dynamic> userToJson() => {
         "status": status,
         "msg": msg,
-        "data": data,
+        "user": user!.toJson(),
     };
+
+
+
 
   // funciones para verificar la condición del response
 
@@ -37,7 +51,7 @@ class ApiResponse {
   bool isOK() => status == 0;
 
     // retorna true si tiene "data"
-  bool hasData() => data != null || data != '';
+  bool hasUser() => user != null;
 
     // retorna true si tiene "msg"
   bool hasMsg() => msg != null || msg != '';
