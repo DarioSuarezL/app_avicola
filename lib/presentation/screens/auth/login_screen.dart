@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
+
 
 class LoginScreen extends StatelessWidget {
 
@@ -18,11 +20,16 @@ class LoginScreen extends StatelessWidget {
 }
 
 class _LoginView extends StatelessWidget {
-  const _LoginView();
+
+  final _formKey = GlobalKey<FormState>();
+  _LoginView();
+  String name = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal:20.0, vertical: 20.0),
         children: [
@@ -50,15 +57,21 @@ class _LoginView extends StatelessWidget {
             ),
       
             TextFormField(
-              // autofocus: true,
               keyboardType: TextInputType.name,
               decoration: const InputDecoration(
-                labelText: 'Nombre completo',
+                labelText: 'Nombre de usuario',
                 // hintText: '',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))
                 )
               ),
+              validator: (value){
+                if(value == null || value.isEmpty){
+                  return 'Por favor ingrese su nombre de usuario';
+                }
+                return null;
+              },
+              onChanged: (value) => name = value,
             ),
 
             const Divider(
@@ -74,6 +87,13 @@ class _LoginView extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(20.0))
                 )
               ),
+              validator: (value){
+                if(value == null || value.isEmpty){
+                  return 'Por favor ingrese su contraseña';
+                }
+                return null;
+              },
+              onChanged: (value) => password = value,
             ),
 
             const Divider(
@@ -82,7 +102,14 @@ class _LoginView extends StatelessWidget {
             ),
 
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async{
+                if(_formKey.currentState!.validate()){
+                  final nombreUsuario = name;
+                  final contrasena = password;
+                  final scaf = ScaffoldMessenger.of(context);
+                  
+
+                }
                 context.replaceNamed('home_screen');
               },
               child: const Text('Ingresar'),
