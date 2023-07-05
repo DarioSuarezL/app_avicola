@@ -11,13 +11,19 @@ class UserProvider with ChangeNotifier {
 
 
   Future<ApiResponse> loginUser(String nombreUsuario, String contrasena) async{
-    ApiService apiService = ApiService();
-    ApiResponse apiResponse = await apiService.login(nombreUsuario, contrasena);
-      if(apiResponse.hasUser() && apiResponse.isOK()){
-        user = apiResponse.user;
-        notifyListeners();
-      }
-    return apiResponse;
+    try{
+      ApiService apiService = ApiService();
+      ApiResponse apiResponse = await apiService.login(nombreUsuario, contrasena);
+        if(apiResponse.hasUser() && apiResponse.isOK()){
+          user = apiResponse.user;
+          notifyListeners();
+        }
+        return apiResponse;
+
+    }catch(e){
+      return ApiResponse(status: 1, msg: 'Error del servidor');
+      
+    }
   }
 
   Future<ApiResponse> registerUser(String nombreUsuario, String contrasena, int id, String username) async{

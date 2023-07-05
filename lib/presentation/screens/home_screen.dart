@@ -57,8 +57,8 @@ class _HomeView extends StatelessWidget {
             ),
           ),
           onTap: () {
-            context.pushNamed('register_screen');
-            // appMenuItems[index].routeName;
+            context.pushNamed(appMenuItems[index].routeName);
+            // ;
           },
         ),
       ),

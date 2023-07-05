@@ -31,7 +31,7 @@ class _LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    final colors = Theme.of(context).colorScheme;
+    // final colors = Theme.of(context).colorScheme;
     String name = '';
     String password = '';
 
@@ -122,7 +122,7 @@ class _LoginView extends StatelessWidget {
                   }else{
                     scaf.showSnackBar(
                       SnackBar(
-                        backgroundColor: colors.primary,
+                        // backgroundColor: colors.primary,
                         content: Text(apiRes.msg!),
                         duration: const Duration(seconds: 2),
                       )

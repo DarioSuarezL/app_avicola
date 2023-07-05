@@ -2,7 +2,7 @@ import 'package:app_avicola/config/menu/rol_items.dart';
 import 'package:app_avicola/presentation/models/api_response.dart';
 import 'package:app_avicola/presentation/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart ';
+// import 'package:go_router/go_router.dart ';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -21,24 +21,17 @@ class RegisterScreen extends StatelessWidget {
   }
 }
 
-class _RegisterView extends StatefulWidget {
+class _RegisterView extends StatelessWidget {
 
 
   _RegisterView();
 
-  @override
-  State<_RegisterView> createState() => _RegisterViewState();
-}
-
-class _RegisterViewState extends State<_RegisterView> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    final colors = Theme.of(context).colorScheme;
-    // String? nombreUsuario;
-    // String? contrasena;
+    // final colors = Theme.of(context).colorScheme;
     RolItem? role;
     String? name;
     String? password;
@@ -171,40 +164,27 @@ class _RegisterViewState extends State<_RegisterView> {
                 if(_formKey.currentState!.validate()){
                   String nombreUsuario = name!;
                   String contrasena = password!;
-                  int id_rol = role!.id;
+                  int idRol = role!.id;
                   String username = userProvider.user!.nombreUsuario;
                   final scaf = ScaffoldMessenger.of(context);
 
-                  ApiResponse res = await userProvider.registerUser(nombreUsuario, contrasena, id_rol, username);
+                  ApiResponse res = await userProvider.registerUser(nombreUsuario, contrasena, idRol, username);
                   
 
                   if(res.hasMsg()){
                     scaf.showSnackBar(
                       SnackBar(
                         content: Text(res.msg!),
+                        // backgroundColor: colors.primary,
                         duration: const Duration(seconds: 2),
                       )
                     );
                   }
 
-
-
-                  // context.replaceNamed('home_screen');
                 }
               },
             ),
 
-            // const Divider(
-            //   height: 60.0,
-            //   color: Colors.transparent,
-            // ),
-
-            // TextButton(
-            //   onPressed: (){
-            //     context.replaceNamed('login_screen');
-            //   },
-            //   child: const Text('¿Ya tienes una cuenta? Ingresa aquí'),
-            // )
           ],
         ),],
       ),
