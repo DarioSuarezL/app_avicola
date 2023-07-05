@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:app_avicola/config/menu/rol_items.dart';
 import 'package:app_avicola/presentation/models/api_response.dart';
 import 'package:app_avicola/presentation/providers/user_provider.dart';
@@ -34,16 +32,18 @@ class _RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<_RegisterView> {
   final _formKey = GlobalKey<FormState>();
-  RolItem? rol;
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     final colors = Theme.of(context).colorScheme;
+    // String? nombreUsuario;
+    // String? contrasena;
+    RolItem? role;
     String? name;
     String? password;
-    String? cpassword;
-    int? idRol;
+
+
 
     return Form(
       key: _formKey,
@@ -51,13 +51,13 @@ class _RegisterViewState extends State<_RegisterView> {
         padding: const EdgeInsets.symmetric(horizontal:20.0, vertical: 20.0),
         children: [Column(
           children: [
-            Center(
-              child: Image.asset(
-                'assets/logo_app.png',
-                width: 200.0,
-                height: 200.0,
-              )
-            ),
+            // Center(
+            //   child: Image.asset(
+            //     'assets/logo_app.png',
+            //     width: 200.0,
+            //     height: 200.0,
+            //   )
+            // ),
             
             const Text(
               'Ingrese sus datos:',
@@ -89,7 +89,6 @@ class _RegisterViewState extends State<_RegisterView> {
               },
               onChanged: (value){
                 name = value;
-                setState(() {});
               } 
             ),
 
@@ -114,7 +113,6 @@ class _RegisterViewState extends State<_RegisterView> {
               },
               onChanged: (value){
                 password = value;
-                setState(() {});
               }
             ),
 
@@ -147,9 +145,9 @@ class _RegisterViewState extends State<_RegisterView> {
               color: Colors.transparent,
             ),
 
-            DropdownButton<RolItem>(
+            DropdownButtonFormField<RolItem>(
               hint: const Text('Selecione un rol'),
-              value: rol,
+              value: role,
               items: appRolItems.map((rolItem){
                 return DropdownMenuItem(
                   value: rolItem,
@@ -157,11 +155,8 @@ class _RegisterViewState extends State<_RegisterView> {
                 );
               }).toList(),
               onChanged: (value){
-                setState(() {
-                  rol = value!;
-                  idRol = value.id;
+                role = value!;
                   // print(idRol!);
-                });
               },
             ),
 
@@ -173,14 +168,11 @@ class _RegisterViewState extends State<_RegisterView> {
             ElevatedButton(
               child: const Text('Registrar'),
               onPressed: () async{
-                print('confirmar contra: $cpassword');
-                print('contra: $password');
-                print('rol: $idRol');
                 if(_formKey.currentState!.validate()){
                   String nombreUsuario = name!;
                   String contrasena = password!;
-                  int id_rol = idRol!;
-                  String username = 'jajaja';
+                  int id_rol = role!.id;
+                  String username = userProvider.user!.nombreUsuario;
                   final scaf = ScaffoldMessenger.of(context);
 
                   ApiResponse res = await userProvider.registerUser(nombreUsuario, contrasena, id_rol, username);

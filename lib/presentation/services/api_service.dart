@@ -33,11 +33,14 @@ class ApiService{
 
   Future<ApiResponse> register(String nombreUsuario, String contrasena, int id, String username) async{
     final uri = Uri.parse('${Env.apiUrl}/api/register');
+    // final data = jsonEncode({
+      
+    // });
 
     final res = await http.post(uri, body:{
       'nombre_usuario': nombreUsuario,
       'contraseña': contrasena,
-      'id': id,
+      'id_rol': id.toString(),
       'username': username
     });
 
