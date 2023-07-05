@@ -26,11 +26,39 @@ const appMenuItems = <MenuItem>[
     routeName: 'galpones_screen'
   ),
   MenuItem(
+    title: 'Lotes',
+    subTitle: 'Gestionar lotes',
+    link: '/lotes',
+    icon: Icons.add_home_work,
+    routeName: 'lotes_screen'
+  ),
+  MenuItem(
     title: 'Alertas',
     subTitle: 'Alertas de estado de los distintos galpones',
     link: '/alertas',
     icon: Icons.campaign,
     routeName: 'alertas_screen'
   ), 
+  MenuItem(
+    title: 'Usuarios',
+    subTitle: 'Gestionar usuarios',
+    link: '/usuarios',
+    icon: Icons.person,
+    routeName: 'usuarios_screen'
+  ),
+  MenuItem(
+    title: 'Vacunas',
+    subTitle: 'Gestionar vacunas',
+    link: '/vacunas',
+    icon: Icons.medical_services,
+    routeName: 'vacunas_screen'
+  ),
+  MenuItem(
+    title: 'Aves',
+    subTitle: 'Gestionar especies de aves',
+    link: '/aves',
+    icon: Icons.add_box_sharp,
+    routeName: 'aves_screen'
+  ),
   
 ];

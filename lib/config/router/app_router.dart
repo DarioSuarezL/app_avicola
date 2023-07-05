@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:app_avicola/presentation/screens/screens.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/register',
   routes: [
     GoRoute(
       name: LoginScreen.routeName,

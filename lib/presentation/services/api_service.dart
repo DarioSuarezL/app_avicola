@@ -7,15 +7,16 @@ import 'package:http/http.dart' as http;
 
 
 class ApiService{
+
+
   Future<ApiResponse> login(String nombreUsuario, String contrasena) async{
     final uri = Uri.parse('${Env.apiUrl}/api/login');
-    // final String data = json.encode();
 
     final res = await http.post(uri, body:{
       'nombre_usuario': nombreUsuario,
       'contraseña': contrasena
     });
-    print(res.body);
+    
     // En caso de que el servidor responda (sin tomar en cuenta que la respuesta sea la esperada)
     if(res.statusCode == 200){
       final decoded = await json.decode(res.body);
@@ -25,6 +26,27 @@ class ApiService{
       return ApiResponse.msgFromJson(decoded);
     }
     
+    // En caso de que el servidor no responda
+    return ApiResponse(status: 1, msg: 'Algo salió mal');
+  }
+
+
+  Future<ApiResponse> register(String nombreUsuario, String contrasena, int id, String username) async{
+    final uri = Uri.parse('${Env.apiUrl}/api/register');
+
+    final res = await http.post(uri, body:{
+      'nombre_usuario': nombreUsuario,
+      'contraseña': contrasena,
+      'id': id,
+      'username': username
+    });
+
+    // En caso de que el servidor responda (sin tomar en cuenta que la respuesta sea la esperada)
+    if(res.statusCode == 200){
+      final decoded = await json.decode(res.body);
+      return ApiResponse.msgFromJson(decoded);
+    }
+
     // En caso de que el servidor no responda
     return ApiResponse(status: 1, msg: 'Algo salió mal');
   }

@@ -134,17 +134,17 @@ class _LoginView extends StatelessWidget {
               child: const Text('Ingresar'),
             ),
 
-            const Divider(
-              height: 140.0,
-              color: Colors.transparent,
-            ),
+            // const Divider(
+            //   height: 140.0,
+            //   color: Colors.transparent,
+            // ),
 
-            TextButton(
-              onPressed: (){
-                context.replaceNamed('register_screen');
-              },
-              child: const Text('¿No tienes una cuenta? Regístrate aquí'),
-            )
+            // TextButton(
+            //   onPressed: (){
+            //     context.replaceNamed('register_screen');
+            //   },
+            //   child: const Text('¿No tienes una cuenta? Regístrate aquí'),
+            // )
 
           ],
         ),

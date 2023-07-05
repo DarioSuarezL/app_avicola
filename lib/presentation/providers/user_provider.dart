@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class UserProvider with ChangeNotifier {
   User? user;
+  // String? msg;
 
 
   Future<ApiResponse> loginUser(String nombreUsuario, String contrasena) async{
@@ -16,6 +17,12 @@ class UserProvider with ChangeNotifier {
         user = apiResponse.user;
         notifyListeners();
       }
+    return apiResponse;
+  }
+
+  Future<ApiResponse> registerUser(String nombreUsuario, String contrasena, int id, String username) async{
+    ApiService apiService = ApiService();
+    ApiResponse apiResponse = await apiService.register(nombreUsuario, contrasena, id, username);
     return apiResponse;
   }
 

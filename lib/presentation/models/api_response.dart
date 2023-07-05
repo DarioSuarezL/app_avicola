@@ -25,21 +25,21 @@ class ApiResponse {
     // Posibles responses para login y register
 
     factory ApiResponse.userFromJson(Map<String, dynamic> json) => ApiResponse(
-        status: json["status"],
-        user: User.fromJson(json["data"]),
+      status: json["status"],
+      user: User.fromJson(json["data"]),
     );
 
     factory ApiResponse.msgFromJson(Map<String, dynamic> json) => ApiResponse(
-        status: json["status"],
-        msg: json["msg"],
+      status: json["status"],
+      msg: json["msg"],
     );
 
 
 
     Map<String, dynamic> userToJson() => {
-        "status": status,
-        "msg": msg,
-        "user": user!.toJson(),
+      "status": status,
+      "msg": msg,
+      "user": user!.toJson(),
     };
 
 
