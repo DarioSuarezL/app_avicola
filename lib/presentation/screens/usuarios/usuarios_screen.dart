@@ -50,7 +50,7 @@ class _UsuariosView extends StatelessWidget {
           title: Text('Nombre: ${listUsers[index].nombreUsuario }'),
           subtitle: Text('Rol: ${listUsers[index].rol.nombre }'),
           trailing: IconButton(
-            icon: const Icon(Icons.edit),
+            icon: const Icon(Icons.delete),
             onPressed: (){},
           ),
         );

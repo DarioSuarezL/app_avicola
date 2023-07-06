@@ -1,6 +1,8 @@
+import 'package:app_avicola/presentation/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:app_avicola/config/menu/drawer_items.dart';
+import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
@@ -9,6 +11,7 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return const Drawer(
       child: Column(
         children: [
@@ -53,6 +56,9 @@ class _DrawerHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(20.0, 70.0, 20.0, 50.0),
       child: Column(
@@ -65,12 +71,12 @@ class _DrawerHeader extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10.0),
-          const Text(
-            'Usuario',
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
+          Text(
+            'Usuario: ${userProvider.user!.nombreUsuario}',
+            style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
           ),
-          const Text(
-            'Código: 0',
+          Text(
+            'Código: ${userProvider.user!.idUser}',
             style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400),
           )
         ],

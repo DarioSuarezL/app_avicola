@@ -1,4 +1,5 @@
 import 'package:app_avicola/config/menu/menu_items.dart';
+import 'package:app_avicola/presentation/providers/sheds_provider.dart';
 import 'package:app_avicola/presentation/providers/user_provider.dart';
 import 'package:app_avicola/presentation/providers/users_provider.dart';
 import 'package:app_avicola/presentation/screens/auth/custom_drawer.dart';
@@ -34,6 +35,7 @@ class _HomeView extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     final usersProvider = Provider.of<UsersProvider>(context, listen: false);
     final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final shedsProvider = Provider.of<ShedsProvider>(context, listen: false);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -62,10 +64,23 @@ class _HomeView extends StatelessWidget {
             ),
           ),
           onTap: () async {
-            if(appMenuItems[index].routeName == "usuarios_screen"){
-              final userList = await usersProvider.getUsers(userProvider.idRol!);
+            if(appMenuItems[index].routeName == "usuarios_screen" || appMenuItems[index].routeName == "galpones_screen"){
+              final scaf = ScaffoldMessenger.of(context);
+              final apiRes = await usersProvider.getUsers(userProvider.idRol!);
+              final apiResG = await shedsProvider.getSheds();
+              if(apiRes.hasMsg()){
+                scaf.showSnackBar(
+                  SnackBar(
+                    content: Text(apiRes.msg ?? 'Hoal'),
+                    duration: const Duration(seconds: 2),
+                  )
+                );
+              }else{
+                Future.microtask(() => context.pushNamed(appMenuItems[index].routeName));
+              }
+            }else{
+              context.pushNamed(appMenuItems[index].routeName);
             }
-            Future.microtask(() => context.pushNamed(appMenuItems[index].routeName));
             
             // ;
           },

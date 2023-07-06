@@ -4,6 +4,7 @@
 
 // import 'dart:convert';
 
+import 'package:app_avicola/presentation/models/shed.dart';
 import 'package:app_avicola/presentation/models/user.dart';
 import 'package:app_avicola/presentation/models/user_data.dart';
 
@@ -16,12 +17,14 @@ class ApiResponse {
     String? msg;
     User? user;
     List<UserData>? users; //Lista de usuarios en general
+    List<Shed>? sheds; //Lista de galpones
 
     ApiResponse({
         required this.status,
         this.msg,
         this.user,
         this.users,
+        this.sheds
     });
 
 
@@ -52,6 +55,14 @@ class ApiResponse {
       users: List<UserData>.from(json["data"].map((x) => UserData.fromJson(x))),
     );
 
+    // Posibles responses para obtener galpones (CRUD)
+
+    factory ApiResponse.shedsFromJson(Map<String, dynamic> json) => ApiResponse(
+      status: json["status"],
+      sheds: List<Shed>.from(json["data"].map((x) => Shed.fromJson(x))),
+      // users: List<UserData>.from(json["data"].map((x) => UserData.fromJson(x))),
+    );
+
 
   // funciones para verificar la condición del response
     // retorna true si no se trata de response de error
@@ -61,8 +72,11 @@ class ApiResponse {
   bool hasUser() => user != null;
 
     // retorna true si tiene "msg"
-  bool hasMsg() => msg != null || msg != '';
+  bool hasMsg() => msg != null;
 
     // retorna true si tiene La lista de usuarios
   bool hasUsers() => users != null;
+
+    // retorna true si tiene La lista de galpones
+  bool hasSheds() => sheds != null;
 }

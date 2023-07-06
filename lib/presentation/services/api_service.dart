@@ -66,6 +66,19 @@ class ApiService{
     return ApiResponse(status: 1, msg: "Algo salió mal");
   }
 
+  //Trae todos los galpones
+  Future<ApiResponse> sheds() async{
+    final uri = Uri.parse('${Env.apiUrl}/galpon');
+    
+    final res = await http.get(uri);
+
+    if(res.statusCode == 200){
+      final decoded = json.decode(res.body);
+      return ApiResponse.shedsFromJson(decoded);
+    }
+
+    return ApiResponse(status: 1, msg: "Algo salió mal");
+  }
 
   
 }
