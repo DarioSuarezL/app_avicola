@@ -1,6 +1,7 @@
 import 'package:app_avicola/config/router/app_router.dart';
 import 'package:app_avicola/config/theme/app_theme.dart';
 import 'package:app_avicola/presentation/providers/user_provider.dart';
+import 'package:app_avicola/presentation/providers/users_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => UsersProvider()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

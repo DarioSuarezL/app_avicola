@@ -1,7 +1,10 @@
 import 'package:app_avicola/config/menu/menu_items.dart';
+import 'package:app_avicola/presentation/providers/user_provider.dart';
+import 'package:app_avicola/presentation/providers/users_provider.dart';
 import 'package:app_avicola/presentation/screens/auth/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -29,6 +32,8 @@ class _HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final colors = Theme.of(context).colorScheme;
+    final usersProvider = Provider.of<UsersProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -56,8 +61,12 @@ class _HomeView extends StatelessWidget {
               ),
             ),
           ),
-          onTap: () {
-            context.pushNamed(appMenuItems[index].routeName);
+          onTap: () async {
+            if(appMenuItems[index].routeName == "usuarios_screen"){
+              final userList = await usersProvider.getUsers(userProvider.idRol!);
+            }
+            Future.microtask(() => context.pushNamed(appMenuItems[index].routeName));
+            
             // ;
           },
         ),

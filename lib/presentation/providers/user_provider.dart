@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class UserProvider with ChangeNotifier {
   User? user;
+  int? idRol;
   // String? msg;
 
 
@@ -16,6 +17,7 @@ class UserProvider with ChangeNotifier {
       ApiResponse apiResponse = await apiService.login(nombreUsuario, contrasena);
         if(apiResponse.hasUser() && apiResponse.isOK()){
           user = apiResponse.user;
+          idRol = user!.idRol;
           notifyListeners();
         }
         return apiResponse;
@@ -27,9 +29,14 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<ApiResponse> registerUser(String nombreUsuario, String contrasena, int id, String username) async{
-    ApiService apiService = ApiService();
-    ApiResponse apiResponse = await apiService.register(nombreUsuario, contrasena, id, username);
-    return apiResponse;
+    try{
+      ApiService apiService = ApiService();
+      ApiResponse apiResponse = await apiService.register(nombreUsuario, contrasena, id, username);
+      return apiResponse;
+    }catch(error){
+      return ApiResponse(status: 1, msg: 'Error del servidor');
+    }
+
   }
 
 }

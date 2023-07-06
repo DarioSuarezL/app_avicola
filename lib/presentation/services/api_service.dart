@@ -33,9 +33,6 @@ class ApiService{
 
   Future<ApiResponse> register(String nombreUsuario, String contrasena, int id, String username) async{
     final uri = Uri.parse('${Env.apiUrl}/api/register');
-    // final data = jsonEncode({
-      
-    // });
 
     final res = await http.post(uri, body:{
       'nombre_usuario': nombreUsuario,
@@ -53,4 +50,22 @@ class ApiService{
     // En caso de que el servidor no responda
     return ApiResponse(status: 1, msg: 'Algo salió mal');
   }
+
+
+  //Trae todos los usuarios
+  Future<ApiResponse> users(int idRol) async{
+    final uri = Uri.http(Env.authority,'/user', {'id_rol': idRol.toString()});
+    
+    final res = await http.get(uri);
+
+    if(res.statusCode == 200){
+      final decoded = json.decode(res.body);
+      return ApiResponse.usersFromJson(decoded);
+    }
+
+    return ApiResponse(status: 1, msg: "Algo salió mal");
+  }
+
+
+  
 }
