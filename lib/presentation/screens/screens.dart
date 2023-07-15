@@ -1,7 +1,10 @@
+
 export 'package:app_avicola/presentation/screens/home_screen.dart';
 
 // Auth screens
 export 'package:app_avicola/presentation/screens/auth/login_screen.dart';
+export 'package:app_avicola/presentation/screens/auth/usuario_screen.dart';
+export 'package:app_avicola/presentation/screens/auth/change_pwd_screen.dart';
 
 // Usuarios screens
 export 'package:app_avicola/presentation/screens/usuarios/register_screen.dart';

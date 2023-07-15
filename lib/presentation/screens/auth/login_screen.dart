@@ -32,15 +32,15 @@ class _LoginView extends StatelessWidget {
     
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     // final colors = Theme.of(context).colorScheme;
-    String name = '';
-    String password = '';
+    String? name;
+    String? password;
 
 
     return Form(
       key: _formKey,
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal:20.0, vertical: 20.0),
-        children: [
+        children: <Widget>[
           Column(
           children: [
             Center(
@@ -116,18 +116,29 @@ class _LoginView extends StatelessWidget {
                   final contrasena = password;
                   final scaf = ScaffoldMessenger.of(context);
 
-                  ApiResponse apiRes = await userProvider.loginUser(nombreUsuario, contrasena);
-                  if(apiRes.isOK()){
-                    await Future.microtask(() => context.goNamed('home_screen'));
-                  }else{
+                  try{
+                    ApiResponse apiRes = await userProvider.loginUser(nombreUsuario!, contrasena!);
+                    if(apiRes.isOK()){
+                      await Future.microtask(() => context.goNamed('home_screen'));
+                    }else{
+                      scaf.showSnackBar(
+                        SnackBar(
+                          // backgroundColor: colors.primary,
+                          content: Text(apiRes.msg!),
+                          duration: const Duration(seconds: 2),
+                        )
+                      );
+                  }
+                  }catch(error){
                     scaf.showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         // backgroundColor: colors.primary,
-                        content: Text(apiRes.msg!),
-                        duration: const Duration(seconds: 2),
+                        content: Text('Error de aplicación'),
+                        duration: Duration(seconds: 2),
                       )
                     );
                   }
+                  
 
                 }
               },

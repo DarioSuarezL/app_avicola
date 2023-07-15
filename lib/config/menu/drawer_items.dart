@@ -21,9 +21,16 @@ const appDrawerItems = <DrawerItem>[
     title: 'Inicio',
     subTitle: 'Gestión general',
     link: '/home',
-    icon: Icons.manage_accounts,
+    icon: Icons.precision_manufacturing,
     routeName: 'home_screen'
   ),
+  DrawerItem(
+    title: 'Opciones de usuario',
+    subTitle: 'Editar información personal',
+    link: '/usuario',
+    icon: Icons.manage_accounts,
+    routeName: 'usuario_screen'
+  ),  
   DrawerItem(
     title: 'Cerrar sesión',
     subTitle: 'Para iniciar sesión con otro usuario',
