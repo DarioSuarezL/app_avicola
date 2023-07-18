@@ -52,7 +52,7 @@ class ApiService{
   }
 
 
-  //Trae todos los usuarios
+  //Trae todos los usuarios (CRUD)
   Future<ApiResponse> users(int idRol) async{
     final uri = Uri.http(Env.authority,'/user', {'id_rol': idRol.toString()});
     
@@ -65,6 +65,11 @@ class ApiService{
 
     return ApiResponse(status: 1, msg: "Algo salió mal");
   }
+
+  // Future<ApiResponse> delUser(int id) async{
+
+  // }
+
 
   //Trae todos los galpones
   Future<ApiResponse> sheds() async{
@@ -80,5 +85,44 @@ class ApiService{
     return ApiResponse(status: 1, msg: "Algo salió mal");
   }
 
-  
+  //Trae todas las vacunas
+  Future<ApiResponse> vaccines() async{
+    final uri = Uri.parse('${Env.apiUrl}/health/vac');
+
+    final res = await http.get(uri);
+
+    if(res.statusCode == 200){
+      final decoded = json.decode(res.body);
+      return ApiResponse.vaccinesFromJson(decoded);
+    }
+
+    return ApiResponse(status: 1, msg: "Algo salió mal");
+  }
+
+  //Trae todas las incubadoras
+ Future<ApiResponse> incubators() async{
+    final uri = Uri.parse('${Env.apiUrl}/prod/eggs/incu');
+    final res = await http.get(uri);
+
+    if(res.statusCode == 200){
+      final decoded = json.decode(res.body);
+      return ApiResponse.incubatorsFromJson(decoded);
+    }
+
+    return ApiResponse(status: 1, msg: "Algo salió mal");
+ }
+
+ //Trae la incubación por id
+ Future<ApiResponse> incubation(int idInc) async{
+    final uri = Uri.http(Env.authority,'/prod/eggs/incu/id', {'id_inc': idInc.toString()});
+    final res = await http.get(uri);
+
+    if(res.statusCode == 200){
+      final decoded = json.decode(res.body);
+      return ApiResponse.incubationFromJson(decoded);
+    }
+
+    return ApiResponse(status: 1, msg: "Algo salió mal");
+ }
+
 }

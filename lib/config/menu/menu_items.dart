@@ -25,13 +25,13 @@ const appMenuItems = <MenuItem>[
     icon: Icons.home_filled,
     routeName: 'galpones_screen'
   ),
-  MenuItem(
-    title: 'Lotes',
-    subTitle: 'Gestionar lotes',
-    link: '/lotes',
-    icon: Icons.add_home_work,
-    routeName: 'lotes_screen'
-  ),
+  // MenuItem(
+  //   title: 'Lotes',
+  //   subTitle: 'Gestionar lotes',
+  //   link: '/lotes',
+  //   icon: Icons.add_home_work,
+  //   routeName: 'lotes_screen'
+  // ),
   MenuItem(
     title: 'Alertas',
     subTitle: 'Alertas de estado de los distintos galpones',
@@ -54,11 +54,12 @@ const appMenuItems = <MenuItem>[
     routeName: 'vacunas_screen'
   ),
   MenuItem(
-    title: 'Aves',
-    subTitle: 'Gestionar especies de aves',
-    link: '/aves',
-    icon: Icons.add_box_sharp,
-    routeName: 'aves_screen'
+    title: 'Incubadoras',
+    subTitle: 'Gestionar incubadoras',
+    link: '/incubadoras',
+    icon: Icons.egg,
+    routeName: 'incubadoras_screen'
   ),
+
   
 ];

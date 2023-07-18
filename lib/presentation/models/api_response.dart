@@ -4,9 +4,12 @@
 
 // import 'dart:convert';
 
+import 'package:app_avicola/presentation/models/incubation.dart';
+import 'package:app_avicola/presentation/models/incubator.dart';
 import 'package:app_avicola/presentation/models/shed.dart';
 import 'package:app_avicola/presentation/models/user.dart';
 import 'package:app_avicola/presentation/models/user_data.dart';
+import 'package:app_avicola/presentation/models/vaccine.dart';
 
 // ApiResponse apiResponseFromJson(String str) => ApiResponse.fromJson(json.decode(str));
 
@@ -18,13 +21,19 @@ class ApiResponse {
     User? user;
     List<UserData>? users; //Lista de usuarios en general
     List<Shed>? sheds; //Lista de galpones
+    List<Vaccine>? vaccines;
+    List<Incubator>? incubators;
+    List<Incubation>? incubations;
 
     ApiResponse({
         required this.status,
         this.msg,
         this.user,
         this.users,
-        this.sheds
+        this.sheds,
+        this.vaccines,
+        this.incubators,
+        this.incubations,
     });
 
 
@@ -64,7 +73,32 @@ class ApiResponse {
     );
 
 
+    // Posibles responses para obtener vacunas (CRUD)
+    factory ApiResponse.vaccinesFromJson(Map<String, dynamic> json) => ApiResponse(
+      status: json["status"],
+      vaccines: List<Vaccine>.from(json["data"].map((x) => Vaccine.fromJson(x))),
+    );
+
+    // Posibles responses para obtener incubadoras
+    factory ApiResponse.incubatorsFromJson(Map<String, dynamic> json) => ApiResponse(
+      status: json["status"],
+      incubators: List<Incubator>.from(json["data"].map((x) => Incubator.fromJson(x))),
+    );
+
+    factory ApiResponse.incubationFromJson(Map<String, dynamic> json) => ApiResponse(
+      status: json["status"],
+      incubations: List<Incubation>.from(json["data"].map((x) => Incubation.fromJson(x))),
+    );
+
+
   // funciones para verificar la condición del response
+  bool hasIncubations() => incubations != null;
+    // retorna true si tiene "incubators"
+  bool hasIncubators() => incubators != null;
+  
+    // retorna true si tiene "vaccines"
+  bool hasVaccines() => vaccines != null;
+
     // retorna true si no se trata de response de error
   bool isOK() => status == 0;
 

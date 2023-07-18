@@ -38,12 +38,12 @@ class _GalponesView extends StatelessWidget {
       itemCount: listSheds!.length,
       itemBuilder: (context, index) {
         return ListTile(
-          title: Text('Galpón ${listSheds[index].idGalpon},   Dim: ${listSheds[index].dimension}'),
+          title: Text('Galpón ${listSheds[index].idGalpon},   Dim: ${listSheds[index].dimension}', style: const TextStyle(fontSize: 20)),
           subtitle: Text('Capacidad: ${listSheds[index].capacidad}'),
-          trailing: IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: (){},
-          ),
+          // trailing: IconButton(
+          //   icon: const Icon(Icons.delete),
+          //   onPressed: (){},
+          // ),
         );
       },
     );

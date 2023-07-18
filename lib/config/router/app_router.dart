@@ -54,13 +54,6 @@ final appRouter = GoRouter(
       builder: (context, state) => const AvesScreen() ,
     ),
 
-    // Lotes routes
-    GoRoute(
-      name: LotesScreen.routeName,
-      path: '/lotes',
-      builder: (context, state) => const LotesScreen() ,
-    ),
-
     // Alertas routes
     GoRoute(
       name: AlertasScreen.routeName,
@@ -73,6 +66,18 @@ final appRouter = GoRouter(
       name: VacunasScreen.routeName,
       path: '/vacunas',
       builder: (context, state) => const VacunasScreen() ,
+    ),
+
+    // Incubadoras routes
+    GoRoute(
+      name: IncubadorasScreen.routeName,
+      path: '/incubadoras',
+      builder: (context, state) => const IncubadorasScreen() ,
+    ),
+    GoRoute(
+      name: IncubacionScreen.routeName,
+      path: '/incubacion',
+      builder: (context, state) => const IncubacionScreen() ,
     ),
     
   ]

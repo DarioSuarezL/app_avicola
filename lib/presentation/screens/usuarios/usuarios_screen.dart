@@ -47,12 +47,14 @@ class _UsuariosView extends StatelessWidget {
       itemBuilder: (context, index) {
 
         return ListTile(
-          title: Text('Nombre: ${listUsers[index].nombreUsuario }'),
+          title: Text('Nombre: ${listUsers[index].nombreUsuario }', style: const TextStyle(fontSize: 20)),
           subtitle: Text('Rol: ${listUsers[index].rol.nombre }'),
-          trailing: IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: (){},
-          ),
+          // trailing: IconButton(
+          //   icon: const Icon(Icons.delete),
+          //   onPressed: (){
+
+          //   },
+          // ),
         );
       },
     );
