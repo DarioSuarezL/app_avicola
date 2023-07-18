@@ -35,6 +35,9 @@ class HomeController{ // Logica de los providers de el screen home
     if(routeName == 'incubadoras_screen'){
       apiRes = await incubatorsProvider.getIncubators();  
     }
+    if(routeName == 'alertas_screen'){
+      apiRes = ApiResponse(status: 0);
+    }
 
 
 

@@ -125,4 +125,20 @@ class ApiService{
     return ApiResponse(status: 1, msg: "Algo salió mal");
  }
 
+ //Trae repo mortalidad
+  // Future<ApiResponse> getMortalidad(DateTime selectDay1, DateTime selectDay2) async{
+  //   final uri = Uri.http(Env.authority, '/report', {'start': selectDay1.toString(), 'end': selectDay2.toString()});
+
+  //   final res = await http.get(uri);
+
+  //   // En caso de que el servidor responda (sin tomar en cuenta que la respuesta sea la esperada)
+  //   if(res.statusCode == 200){
+  //     final decoded = await json.decode(res.body);
+  //     // return ApiResponse.dataFromJson(decoded);
+  //   }
+
+  //   // En caso de que el servidor no responda
+  //   return ApiResponse(status: 1, msg: 'Algo salió mal');
+  // }
+
 }

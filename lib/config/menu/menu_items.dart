@@ -60,6 +60,13 @@ const appMenuItems = <MenuItem>[
     icon: Icons.egg,
     routeName: 'incubadoras_screen'
   ),
+  MenuItem(
+    title: 'Reportes',
+    subTitle: 'Generar reportes',
+    link: '/reportes',
+    icon: Icons.edit_calendar_outlined,
+    routeName: '#'
+  ),
 
   
 ];
